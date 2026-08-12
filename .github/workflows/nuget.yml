@@ -12,6 +12,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+      id-token: write
+
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -22,7 +26,7 @@ jobs:
           dotnet-version: 8.x
 
       - name: Publish NuGet
-        uses: likvido/action-nuget@v1
+        uses: likvido/action-nuget@v2
         with:
           project: src/Likvido.Metadata/Likvido.Metadata.csproj
-          nuget-key: ${{ secrets.NUGET_API_KEY }}
+          nuget-user: ${{ vars.NUGET_USER }}
